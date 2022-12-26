@@ -1,12 +1,49 @@
+import React from 'react';
 import './App.css';
-import AddCourse from "./pages/AddCourse";
-import CourseList from "./pages/CourseList";
-import TypeList from "./pages/TypeList";
+import {
+    AddCourse, CourseList, TypeList
+} from "./pages";
+import courseList from "./fixtures/courseList.json";
 
 function App() {
+    const [courses, setCourses] = React.useState(courseList);
+    const [nav, setNav] = React.useState("/course-type");
+    let Component;
+    let props = {};
+
+    switch (nav) {
+        case "/":
+            Component = CourseList;
+            props = {
+                ...props,
+                courses
+            }
+            break;
+        case "/add-course":
+            Component = AddCourse;
+            props = {
+                ...props,
+                setCourses: setCourses
+            }
+            break;
+        case "/course-type":
+            Component = TypeList;
+            props = {
+                ...props
+            }
+            break;
+        default:
+            Component = CourseList;
+            props = {
+                ...props,
+                courses
+            }
+            break;
+    }
+
   return (
     <div className="App">
-      <TypeList />
+      <Component onNavigate={setNav} {...props} />
     </div>
   );
 }
