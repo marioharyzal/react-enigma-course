@@ -5,7 +5,7 @@ import {
 import {FormInput, StyledContainer} from "../../components";
 
 import {StyledTitle} from "./styles";
-import useAddCourseState from "./hooks/useAddCourseState";
+import useAddCourse from "./useAddCourse";
 
 const FORM_LIST = [
     { id: "title", label: "Title", type: "text", placeholder: "Enter course title" },
@@ -17,7 +17,7 @@ const FORM_LIST = [
 ]
 
 const AddCourse = () => {
-    const { getter, setter } = useAddCourseState();
+    const { getter, setter } = useAddCourse();
 
     return (
         <StyledContainer>

@@ -1,7 +1,7 @@
 import React from "react";
-import {onChangeFile, onChangeText} from "../../../utils/eventHandlers";
+import {onChangeFile, onChangeText} from "../../utils/eventHandlers";
 
-const useAddCourseState = () => {
+const useAddCourse = () => {
     const [title, setTitle] = React.useState("");
     const [description, setDescription] = React.useState("");
     const [typeId, setTypeId] = React.useState("");
@@ -24,4 +24,4 @@ const useAddCourseState = () => {
     }
 }
 
-export default useAddCourseState;
+export default useAddCourse;

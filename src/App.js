@@ -1,11 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
-import AddCourse from "./pages/AddCourse";
+import {
+    AddCourse, CourseList
+} from "./pages";
 
 function App() {
   return (
     <div className="App">
-      <AddCourse />
+      <CourseList />
     </div>
   );
 }
