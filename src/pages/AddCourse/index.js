@@ -16,8 +16,22 @@ const FORM_LIST = [
     { id: "duration", label: "Duration", type: "text", placeholder: "Enter course duration" }
 ]
 
-const AddCourse = ({onNavigate}) => {
+const AddCourse = ({onNavigate, setCourses}) => {
     const { getter, setter } = useAddCourse();
+
+    const handleSubmit = () => {
+        setCourses((prevState) => {
+            const newCourses = {...prevState};
+            const payload = {
+                ...getter,
+                courseId: Math.random().toString()
+            }
+            newCourses?.data?.push(payload);
+            return newCourses;
+        })
+
+        onNavigate("/");
+    }
 
     return (
         <StyledContainer>
@@ -30,10 +44,11 @@ const AddCourse = ({onNavigate}) => {
                         value={getter[item.id]}
                         onChange={setter[item.id]}
                         placeholder={item.placeholder}
+                        key={item.id}
                     />
                 )) }
                 <ButtonGroup>
-                    <Button variant="success">
+                    <Button variant="success" onClick={handleSubmit} disabled={getter.isDisable}>
                         Submit
                     </Button>
                     <Button variant="secondary" onClick={() => onNavigate("/")}>
