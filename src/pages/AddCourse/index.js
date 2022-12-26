@@ -2,10 +2,10 @@ import React from 'react';
 import {
     Form, Button, ButtonGroup
 } from "react-bootstrap";
-import FormInput from "../../components/FormInput";
+import {FormInput, StyledContainer} from "../../components";
 
-import {StyledContainer, StyledTitle} from "./styles";
-import useAddCourseState from "./useAddCourseState";
+import {StyledTitle} from "./styles";
+import useAddCourseState from "./hooks/useAddCourseState";
 
 const FORM_LIST = [
     { id: "title", label: "Title", type: "text", placeholder: "Enter course title" },

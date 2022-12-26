@@ -1,5 +1,5 @@
 import React from "react";
-import {onChangeFile, onChangeText} from "../../utils/eventHandlers";
+import {onChangeFile, onChangeText} from "../../../utils/eventHandlers";
 
 const useAddCourseState = () => {
     const [title, setTitle] = React.useState("");
