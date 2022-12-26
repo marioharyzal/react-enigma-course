@@ -16,7 +16,7 @@ const FORM_LIST = [
     { id: "duration", label: "Duration", type: "text", placeholder: "Enter course duration" }
 ]
 
-const AddCourse = () => {
+const AddCourse = ({onNavigate}) => {
     const { getter, setter } = useAddCourse();
 
     return (
@@ -36,7 +36,7 @@ const AddCourse = () => {
                     <Button variant="success">
                         Submit
                     </Button>
-                    <Button variant="secondary">
+                    <Button variant="secondary" onClick={() => onNavigate("/")}>
                         Cancel
                     </Button>
                 </ButtonGroup>

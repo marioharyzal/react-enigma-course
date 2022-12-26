@@ -104,11 +104,11 @@ const courseList = {
     "size": 5
 }
 
-const CourseList = () => {
+const CourseList = ({onNavigate}) => {
     const [data, setData] = React.useState(courseList);
     return (
         <StyledContainer>
-            <Button variant="success">Add Course</Button>
+            <Button variant="success" onClick={() => onNavigate("/add-course")}>Add Course</Button>
             {data?.data?.length > 0 ? <List data={data?.data} /> : <Empty />}
         </StyledContainer>
     )
