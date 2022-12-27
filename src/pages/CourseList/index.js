@@ -4,20 +4,34 @@ import {Button} from "react-bootstrap";
 import {StyledListGroup, StyledText} from "./styles";
 import CourseItem from "./components/CourseItem";
 
-import courseList from "../../fixtures/courseList.json";
-import {StyledContainer} from "../../components";
+import {StyledContainer, Pagination} from "../../components";
 
 const Empty = () => (
     <StyledText>Data Kosong...</StyledText>
 )
 
 const List = ({data}) => {
+    const [currentPage, setCurrentPage] = React.useState(1);
+    const [recordsPerPage] = React.useState(3);
+
+    const indexOfLastRecord = currentPage * recordsPerPage;
+    const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+    const currentRecords = data?.slice(indexOfFirstRecord, indexOfLastRecord);
+    const totalPage = Math.ceil(data?.length / recordsPerPage);
+
     return (
-        <StyledListGroup>
-            {data?.map((item, index) => (
-                <CourseItem data={item} key={item?.courseId} />
-            ))}
-        </StyledListGroup>
+        <>
+            <StyledListGroup>
+                {currentRecords?.map((item) => (
+                    <CourseItem data={item} key={item?.courseId} />
+                ))}
+            </StyledListGroup>
+            <Pagination
+                totalPage={totalPage}
+                currentPage={currentPage}
+                onChangeCurrentPage={setCurrentPage}
+            />
+        </>
     )
 }
 

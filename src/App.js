@@ -7,7 +7,7 @@ import courseList from "./fixtures/courseList.json";
 
 function App() {
     const [courses, setCourses] = React.useState(courseList);
-    const [nav, setNav] = React.useState("/course-type");
+    const [nav, setNav] = React.useState("/");
     let Component;
     let props = {};
 
