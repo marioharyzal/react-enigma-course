@@ -1,7 +1,9 @@
 import React from "react";
 import { Form, Button, ButtonGroup } from "react-bootstrap";
 import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { FormInput, StyledContainer } from "../../components";
+import constants from "../../constants";
 import { addCourseType } from "../../store/actions/courseTypeAction";
 
 import { StyledTitle } from "./styles";
@@ -10,12 +12,13 @@ import useAddCourseType from "./useAddCourseType";
 const FORM_LIST = [{ id: "typeName", label: "Type name", type: "text", placeholder: "Enter course title" }];
 
 const AddCourseType = ({ onNavigate, addCourseType }) => {
+	const navigate = useNavigate();
 	const { getter, setter } = useAddCourseType();
 
 	const handleSubmit = () => {
 		addCourseType(getter);
 
-		onNavigate("/course-type");
+		navigate(constants.ROUTES.COURSE_TYPE);
 	};
 
 	return (
@@ -36,7 +39,7 @@ const AddCourseType = ({ onNavigate, addCourseType }) => {
 					<Button variant="success" onClick={handleSubmit} disabled={getter.isDisable}>
 						Submit
 					</Button>
-					<Button variant="secondary" onClick={() => onNavigate("/course-type")}>
+					<Button variant="secondary" onClick={() => navigate(constants.ROUTES.COURSE_TYPE)}>
 						Cancel
 					</Button>
 				</ButtonGroup>

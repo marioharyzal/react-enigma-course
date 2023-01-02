@@ -46,7 +46,7 @@ const AddCourse = ({ AddCourse }) => {
 					<Button variant="success" onClick={handleSubmit} disabled={getter.isDisable}>
 						Submit
 					</Button>
-					<Button variant="secondary" onClick={() => navigate("/")}>
+					<Button variant="secondary" onClick={() => navigate(constants.ROUTES.COURSE_LIST)}>
 						Cancel
 					</Button>
 				</ButtonGroup>
