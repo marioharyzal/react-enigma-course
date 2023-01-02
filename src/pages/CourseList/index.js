@@ -1,47 +1,40 @@
 import React from "react";
-import {Button} from "react-bootstrap";
 
-import {StyledListGroup, StyledText} from "./styles";
+import { StyledListGroup } from "./styles";
 import CourseItem from "./components/CourseItem";
+import withPaginationList from "../../hoc/withPaginationList";
+import { connect, useDispatch } from "react-redux";
+import constants from "../../constants";
+import { deleteCourse } from "../../store/actions/courseAction";
 
-import {StyledContainer, Pagination} from "../../components";
+const List = ({ data }) => {
+	const dispatch = useDispatch();
 
-const Empty = () => (
-    <StyledText>Data Kosong...</StyledText>
-)
+	const onDelete = (id) => () => {
+		const isConfirm = window.confirm("Are you sure to delete this course ?");
+		if (isConfirm) {
+			dispatch(deleteCourse(id));
+		}
+	};
 
-const List = ({data}) => {
-    const [currentPage, setCurrentPage] = React.useState(1);
-    const [recordsPerPage] = React.useState(3);
+	return (
+		<StyledListGroup>
+			{data?.map((item) => (
+				<CourseItem data={item} params={item.courseId} key={item?.courseId} onDelete={onDelete(item.courseId)} />
+			))}
+		</StyledListGroup>
+	);
+};
 
-    const indexOfLastRecord = currentPage * recordsPerPage;
-    const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-    const currentRecords = data?.slice(indexOfFirstRecord, indexOfLastRecord);
-    const totalPage = Math.ceil(data?.length / recordsPerPage);
+const mapStateToProps = (state) => {
+	return {
+		listData: state.courses.courseList,
+	};
+};
 
-    return (
-        <>
-            <StyledListGroup>
-                {currentRecords?.map((item) => (
-                    <CourseItem data={item} key={item?.courseId} />
-                ))}
-            </StyledListGroup>
-            <Pagination
-                totalPage={totalPage}
-                currentPage={currentPage}
-                onChangeCurrentPage={setCurrentPage}
-            />
-        </>
-    )
-}
-
-const CourseList = ({onNavigate, courses}) => {
-    return (
-        <StyledContainer>
-            <Button variant="success" onClick={() => onNavigate("/add-course")}>Add Course</Button>
-            {courses?.data?.length > 0 ? <List data={courses?.data} /> : <Empty />}
-        </StyledContainer>
-    )
-}
-
-export default CourseList;
+export default connect(mapStateToProps)(
+	withPaginationList(List, {
+		label: "Add Course",
+		navAdd: constants.ROUTES.ADD_COURSE,
+	})
+);
