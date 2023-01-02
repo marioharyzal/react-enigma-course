@@ -15,6 +15,7 @@ const constants = {
 		EDIT_COURSE: "/course/edit",
 		EDIT_COURSE_TYPE: "/course-type/edit",
 		DASHBOARD: "/",
+		LOGIN: "/auth/login",
 	},
 };
 

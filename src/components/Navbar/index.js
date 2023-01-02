@@ -1,9 +1,14 @@
 import React from "react";
-import { Container, Navbar, NavLink } from "react-bootstrap";
-import { StyledNav } from "./styles";
+import { Container, Navbar } from "react-bootstrap";
+import { StyledButton, StyledNav } from "./styles";
 import { Link } from "react-router-dom";
 
-const NavBarCamp = ({ menu }) => {
+const NavBarCamp = ({ menu, setLoggedIn }) => {
+	const handleLogout = (e) => {
+		e.preventDefault();
+		setLoggedIn(false);
+	};
+
 	return (
 		<Navbar bg="light" expand="light" sticky={"top"}>
 			<Container>
@@ -14,6 +19,9 @@ const NavBarCamp = ({ menu }) => {
 							{item.name}
 						</Link>
 					))}
+					<StyledButton onClick={handleLogout} variant="outline-danger" size="sm">
+						Logout
+					</StyledButton>
 				</StyledNav>
 			</Container>
 		</Navbar>
